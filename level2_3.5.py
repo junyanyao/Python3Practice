@@ -77,10 +77,61 @@ SPY GAME: Write a function that takes in a list of integers and returns True if 
 
 '''
 
-
 def spy_game(nums):
     code =[0,0,7,'x']
     for num in nums:
         if num == code[0]:
             code.pop(0)
     return len(code)==1
+
+
+'''
+
+COUNT PRIMES: Write a function that returns the number of prime numbers that exist up to and including a given number
+count_primes(100) --> 25
+
+By convention, 0 and 1 are not prime.'''
+
+def count_primes(num):
+    primes =[]
+
+    for prime in range(2, num+1):
+        #assume numner is prime until shown it's not
+        isPrime=True
+        for i in range(2,prime):
+            if prime % i ==0:
+                isPrime=False
+        if isPrime:
+            primes.append(prime)
+            
+    return len(primes)
+
+
+#another approach with breaks could be more efficient
+def count_primes(num):
+    primes =[]
+    for i in range(2, num+1):
+        isPrime =True
+        for j in range(2, i):
+            if i % j ==0:
+                isPrime =False
+                break
+        if isPrime:
+            primes.append(i)
+    return len(primes)
+
+
+'''
+Just for fun:¶
+PRINT BIG: Write a function that takes in a single letter, and returns a 5x5 representation of that letter
+print_big('a')
+
+out:   *  
+      * *
+     *****
+     *   *
+     *   *
+HINT: Consider making a dictionary of possible patterns, and mapping the alphabet to specific 5-line combinations of patterns. 
+For purposes of this exercise, it's ok if your dictionary stops at "E".
+'''
+
