@@ -111,3 +111,56 @@ def win_check(board,mark):
     (board[9] == mark and board[5] == mark and board[1] == mark)) # diagonal
 
 win_check(test_board,'X')
+
+#Step 5: Write a function that uses the random module to randomly decide which player goes first. 
+#You may want to lookup random.randint() Return a string of which player went first.
+
+import random
+
+def choose_first():
+    x= random.randint(1,2)
+    if x==1:
+        return 'Player 1 goes first'
+    else:
+        return 'Player 2 goes first'
+    
+
+
+#Step 6: Write a function that returns a boolean indicating whether a space on the board is freely available
+        
+def space_check(board, position):
+    return board[position]==' '
+
+
+#Step 7: Write a function that checks if the board is full and returns a boolean value. True if full, False otherwise.
+
+def full_board_check(board):
+    full= 0
+    for i in range(1,10):
+        if space_check(board, i):
+            return False
+    return True
+            
+#Step 8: Write a function that asks for a player's next position (as a number 1-9) 
+#and then uses the function from step 6 to check if it's a free position. If it is, then return the position for later use.
+
+def player_choice(board):
+    position  = 0
+    while position not in [1,2,3,4,5,6,7,8,9] or (not space_check(board, position)):
+        position = int(input('please choose a position : (1-9)'))
+        
+    return position
+
+#Step 9: Write a function that asks the player if they want to play again and returns a boolean True if they do want to play again.
+
+def replay():
+    choice = input('Play again? Please answer Yes or No')
+    return choice =='Yes'
+
+
+#Step 10: Here comes the hard part! Use while loops and the functions you've made to run the game!
+    
+
+
+
+
