@@ -78,14 +78,13 @@ def display_board(board):
 def player_input():
     marker= ''
     while marker != 'X' and marker !='O':
-        marker =input('Player 1, choose X or O: ')
+        marker =input('Player 1, choose X or O: ').upper()
         
-    player1= marker
-    if player1=='X':
-        player2 ='O'
+    
+    if marker=='X':
+        return ('X','O')
     else:
-        player2='X'
-    return (player1, player2)
+        return ('O','X')
 
 #Step 3: Write a function that takes in the board list object, a marker ('X' or 'O'), 
 #and a desired position (number 1-9) and assigns it to the board.
@@ -94,8 +93,7 @@ def place_marker(board, marker, position):
     board[position]=marker
     
 
-place_marker(test_board,'$',8)
-display_board(test_board)
+
 
 #Step 4: Write a function that takes in a board and checks to see if someone has won.
 
@@ -110,7 +108,7 @@ def win_check(board,mark):
     (board[7] == mark and board[5] == mark and board[3] == mark) or # diagonal
     (board[9] == mark and board[5] == mark and board[1] == mark)) # diagonal
 
-win_check(test_board,'X')
+
 
 #Step 5: Write a function that uses the random module to randomly decide which player goes first. 
 #You may want to lookup random.randint() Return a string of which player went first.
@@ -160,7 +158,68 @@ def replay():
 
 #Step 10: Here comes the hard part! Use while loops and the functions you've made to run the game!
     
+#let player choose marker:
+    
 
+print('Welcome to the game!')
 
+#reset the board:
+while True:
+    TheBoard =[' ']*10
+    player1_marker, player2_marker= player_input()
+    turn= choose_first()
+    
+    play_game =input('Are you ready? please enter yes or no ')
+    if play_game =='yes':
+        game_on= True
+    else:
+        game_on =False
+    
+    while game_on:
+        if turn== 'player1':
+            display_board(TheBoard)
+            position= player_choice(TheBoard)
+            place_marker(TheBoard, player1_marker, position)
+        
+            if win_check(TheBoard, player1_marker):
+                display_board(TheBoard)
+                print('Cong! You won')
+                game_on =False
+            else:
+                if full_board_check(TheBoard):
+                    print('Tie game')
+                    game_on= False
+                    break
+                else:
+                    turn = 'player2'
+        else:
+            display_board(TheBoard)
+            position =player_choice(TheBoard)
+            place_marker(TheBoard, player2_marker, position)
+        
+            if win_check(TheBoard, player2_marker):
+                display_board(TheBoard)
+                print('Cong! you Won')
+                game_on= False
+            else:
+                if full_board_check(TheBoard):
+                    print('Tie game')
+                    break
+                else:
+                    turn= 'player1'
+    if not replay():
+        break
+                
 
-
+        
+                
+    
+            
+                
+            
+            
+        
+        
+    
+    
+    
